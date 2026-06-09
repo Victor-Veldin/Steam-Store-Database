@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Developers</title>
+</head>
+<body>
+
+<h1>Developers</h1>
+
+<a href="/">Back Home</a>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Developer</th>
+    </tr>
+
+    {% for developer in developers %}
+<tr>
+    <td>{{ developer[0] }}</td>
+    <td>{{ developer[1] }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>

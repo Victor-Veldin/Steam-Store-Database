@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Steam Games</title>
+</head>
+<body>
+    <h1>Steam Games</h1>
+
+    <a href="/">Back to Home</a>
+
+    <table border="1">
+        <tr>
+            <th>App ID</th>
+            <th>Name</th>
+            <th>Release Date</th>
+            <th>Price</th>
+        </tr>
+
+       {% for game in games %}
+<tr>
+    <td>{{ game[0] }}</td>
+    <td>{{ game[1] }}</td>
+    <td>{{ game[2] }}</td>
+    <td>{{ game[3] }}</td>
+</tr>
+{% endfor %}
+    </table>
+</body>
+</html>

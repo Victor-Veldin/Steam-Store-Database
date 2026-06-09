@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Genres</title>
+</head>
+<body>
+
+<h1>Genres</h1>
+
+<a href="/">Back Home</a>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Genre</th>
+    </tr>
+
+    {% for genre in genres %}
+<tr>
+    <td>{{ genre[0] }}</td>
+    <td>{{ genre[1] }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>
