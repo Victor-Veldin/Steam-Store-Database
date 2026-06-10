@@ -1,19 +1,57 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Steam Store Database</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>Steam Store Database</h1>
+{% block title %}Home - Steam Store Database{% endblock %}
 
-    <p>COMP4018 Database Project</p>
+{% block content %}
 
-   <ul>
-    <li><a href="/games">View Games</a></li>
-    <li><a href="/genres">View Genres</a></li>
-    <li><a href="/developers">View Developers</a></li>
-</ul>
+<div class="text-center mb-5">
+    <h1 class="display-4">Steam Store Database</h1>
+    <p class="lead">COMP4018 Database Project</p>
+    <p>Explore games, developers, publishers, platforms, ratings, and statistics from the Steam Store dataset.</p>
+</div>
 
-</body>
-</html>
+<div class="row g-4">
+
+    <div class="col-md-4">
+        <div class="card steam-card h-100">
+            <div class="card-body">
+                <h4>Games</h4>
+                <p>Search and view Steam games with release dates, prices, ratings, and detailed information.</p>
+                <a href="/games" class="btn btn-steam">View Games</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card steam-card h-100">
+            <div class="card-body">
+                <h4>Dashboard</h4>
+                <p>View database statistics including total games, genres, developers, publishers, and platforms.</p>
+                <a href="/dashboard" class="btn btn-steam">Open Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card steam-card h-100">
+            <div class="card-body">
+                <h4>Reports</h4>
+                <p>Analyze top rated, most played, most expensive games, and games with most achievements.</p>
+                <a href="/top-rated" class="btn btn-steam">View Reports</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="mt-5 text-center">
+    <a href="/genres" class="btn btn-outline-steam m-2">Genres</a>
+    <a href="/developers" class="btn btn-outline-steam m-2">Developers</a>
+    <a href="/publishers" class="btn btn-outline-steam m-2">Publishers</a>
+    <a href="/platforms" class="btn btn-outline-steam m-2">Platforms</a>
+    <a href="/most-played" class="btn btn-outline-steam m-2">Most Played</a>
+    <a href="/most-expensive" class="btn btn-outline-steam m-2">Most Expensive</a>
+    <a href="/most-achievements" class="btn btn-outline-steam m-2">Most Achievements</a>
+</div>
+
+{% endblock %}

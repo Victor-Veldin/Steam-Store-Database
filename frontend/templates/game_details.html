@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}Game Details{% endblock %}
+
+{% block content %}
+
+{% if game %}
+
+<h1 class="mb-4">{{ game[1] }}</h1>
+
+<div class="card mb-4">
+    <div class="card-body">
+
+        <h4>Game Information</h4>
+
+        <p><strong>App ID:</strong> {{ game[0] }}</p>
+
+        <p><strong>Release Date:</strong> {{ game[2] }}</p>
+
+        <p><strong>English:</strong> {{ game[3] }}</p>
+
+        <p><strong>Required Age:</strong> {{ game[4] }}</p>
+
+        <p><strong>Achievements:</strong> {{ game[5] }}</p>
+
+        <p><strong>Positive Ratings:</strong> {{ game[6] }}</p>
+
+        <p><strong>Negative Ratings:</strong> {{ game[7] }}</p>
+
+        <p><strong>Average Playtime:</strong> {{ game[8] }}</p>
+
+        <p><strong>Median Playtime:</strong> {{ game[9] }}</p>
+
+        <p><strong>Owners:</strong> {{ game[10] }}</p>
+
+        <p><strong>Price:</strong> ${{ game[11] }}</p>
+
+        {% if score %}
+        <p>
+            <strong>User Score:</strong>
+
+            {% if score >= 90 %}
+                <span class="badge bg-success fs-6">{{ score }}%</span>
+
+            {% elif score >= 75 %}
+                <span class="badge bg-primary fs-6">{{ score }}%</span>
+
+            {% elif score >= 50 %}
+                <span class="badge bg-warning text-dark fs-6">{{ score }}%</span>
+
+            {% else %}
+                <span class="badge bg-danger fs-6">{{ score }}%</span>
+
+            {% endif %}
+        </p>
+        {% endif %}
+
+    </div>
+</div>
+
+<div class="row">
+
+    <!-- Genres -->
+    <div class="col-md-3">
+        <div class="card mb-3">
+            <div class="card-header bg-success text-white">
+                Genres
+            </div>
+
+            <ul class="list-group list-group-flush">
+                {% for genre in genres %}
+                <li class="list-group-item">
+                    {{ genre[0] }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Developers -->
+    <div class="col-md-3">
+        <div class="card mb-3">
+            <div class="card-header bg-warning">
+                Developers
+            </div>
+
+            <ul class="list-group list-group-flush">
+                {% for developer in developers %}
+                <li class="list-group-item">
+                    {{ developer[0] }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Publishers -->
+    <div class="col-md-3">
+        <div class="card mb-3">
+            <div class="card-header bg-primary text-white">
+                Publishers
+            </div>
+
+            <ul class="list-group list-group-flush">
+                {% for publisher in publishers %}
+                <li class="list-group-item">
+                    {{ publisher[0] }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Platforms -->
+    <div class="col-md-3">
+        <div class="card mb-3">
+            <div class="card-header bg-dark text-white">
+                Platforms
+            </div>
+
+            <ul class="list-group list-group-flush">
+                {% for platform in platforms %}
+                <li class="list-group-item">
+                    {{ platform[0] }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+{% else %}
+
+<div class="alert alert-danger">
+    Game not found.
+</div>
+
+{% endif %}
+
+<a href="/games" class="btn btn-secondary mt-4">
+    Back to Games
+</a>
+
+{% endblock %}

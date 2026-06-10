@@ -238,13 +238,14 @@ def game_details(appid):
     cur.close()
 
     return render_template(
-        "game_details.html",
-        game=game,
-        genres=genres,
-        developers=developers,
-        publishers=publishers,
-        platforms=platforms
-    )
+    "game_details.html",
+    game=game,
+    genres=genres,
+    developers=developers,
+    publishers=publishers,
+    platforms=platforms,
+    score=score
+)
 
 @app.route("/most-played")
 def most_played():

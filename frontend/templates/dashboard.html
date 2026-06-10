@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4">Database Dashboard</h1>
+
+<div class="row mb-4">
+
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <h5>🎮 Total Games</h5>
+                <h2>{{ total_games }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <h5>🏷️ Total Genres</h5>
+                <h2>{{ total_genres }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-warning">
+            <div class="card-body">
+                <h5>👨‍💻 Total Developers</h5>
+                <h2>{{ total_developers }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <div class="card text-white bg-info">
+            <div class="card-body">
+                <h5>🏢 Total Publishers</h5>
+                <h2>{{ total_publishers }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <div class="card text-white bg-dark">
+            <div class="card-body">
+                <h5>💻 Total Platforms</h5>
+                <h2>{{ total_platforms }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card steam-card mb-4">
+    <div class="card-body">
+        <h4 class="mb-3">Database Overview Chart</h4>
+
+        <div style="max-width:700px; margin:auto;">
+            <canvas id="dashboardChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+
+    <div class="col-md-4 mb-3">
+        <div class="card steam-card h-100">
+            <div class="card-body text-center">
+                <h5>🏆 Top Rated Game</h5>
+                <h4>Counter-Strike: Global Offensive</h4>
+                <p>Most positive ratings in the dataset.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card steam-card h-100">
+            <div class="card-body text-center">
+                <h5>🎮 Most Played Game</h5>
+                <h4>Counter-Strike</h4>
+                <p>Highest average playtime.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card steam-card h-100">
+            <div class="card-body text-center">
+                <h5>💰 Most Expensive Games</h5>
+                <h4>See Report</h4>
+                <a href="/most-expensive" class="btn btn-steam mt-2">View</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<a href="/" class="btn btn-secondary mt-4">Back Home</a>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('dashboardChart');
+
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Games', 'Developers', 'Publishers'],
+            datasets: [{
+                label: 'Total Records',
+                data: [
+                    {{ total_games }},
+                    {{ total_developers }},
+                    {{ total_publishers }}
+                ],
+                backgroundColor: [
+                    '#66c0f4',
+                    '#f4a261',
+                    '#00b4d8'
+                ],
+                borderColor: '#c7d5e0',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#c7d5e0',
+                        font: {
+                            size: 18
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

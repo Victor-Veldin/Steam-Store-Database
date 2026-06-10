@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Top Rated Games{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4">Top Rated Games</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+
+        <thead class="table-success">
+            <tr>
+                <th>Game</th>
+                <th>Positive Ratings</th>
+                <th>Negative Ratings</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for game in games %}
+            <tr>
+                <td>{{ game[0] }}</td>
+                <td>{{ game[1] }}</td>
+                <td>{{ game[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+
+<a href="/" class="btn btn-secondary">
+    Back Home
+</a>
+
+{% endblock %}
