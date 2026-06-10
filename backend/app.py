@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask_mysqldb import MySQL
 
 app = Flask(
@@ -288,6 +288,82 @@ def most_achievements():
     cur.close()
     return render_template("most_achievements.html", games=games)
 
+@app.route("/add-game", methods=["GET", "POST"])
+def add_game():
+    if request.method == "POST":
+        appid = request.form["appid"]
+        name = request.form["name"]
+        release_date = request.form["release_date"]
+        price = request.form["price"]
+
+        cur = mysql.connection.cursor()
+
+        cur.execute("""
+            INSERT INTO Game (
+                appid, name, release_date, english, required_age,
+                achievements, positive_ratings, negative_ratings,
+                average_playtime, median_playtime, owners, price
+            )
+            VALUES (%s, %s, %s, 1, 0, 0, 0, 0, 0, 0, '0-0', %s)
+        """, (appid, name, release_date, price))
+
+        mysql.connection.commit()
+        cur.close()
+
+        return redirect("/games")
+
+    return render_template("add_game.html")
+
+@app.route("/edit-game/<int:appid>", methods=["GET", "POST"])
+def edit_game(appid):
+
+    cur = mysql.connection.cursor()
+
+    if request.method == "POST":
+
+        name = request.form["name"]
+        release_date = request.form["release_date"]
+        price = request.form["price"]
+
+        cur.execute("""
+            UPDATE Game
+            SET name=%s,
+                release_date=%s,
+                price=%s
+            WHERE appid=%s
+        """, (name, release_date, price, appid))
+
+        mysql.connection.commit()
+        cur.close()
+
+        return redirect("/games")
+
+    cur.execute("""
+        SELECT appid, name, release_date, price
+        FROM Game
+        WHERE appid=%s
+    """, (appid,))
+
+    game = cur.fetchone()
+
+    cur.close()
+
+    return render_template("edit_game.html", game=game)
+
+@app.route("/delete-game/<int:appid>")
+def delete_game(appid):
+
+    cur = mysql.connection.cursor()
+
+    cur.execute("""
+        DELETE FROM Game
+        WHERE appid = %s
+    """, (appid,))
+
+    mysql.connection.commit()
+    cur.close()
+
+    return redirect("/games")
 # ==========================
 # RUN APP
 # ==========================

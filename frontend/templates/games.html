@@ -6,6 +6,10 @@
 
 <h1 class="mb-4">Steam Games</h1>
 
+<a href="/add-game" class="btn btn-steam mb-3">
+    Add New Game
+</a>
+
 <form method="GET" action="/games" class="mb-3">
     <div class="input-group">
         <input
@@ -15,30 +19,27 @@
             placeholder="Search game..."
             value="{{ search }}"
         >
-        <button class="btn btn-primary" type="submit">
+        <button class="btn btn-steam" type="submit">
             Search
         </button>
     </div>
 </form>
 
 <div class="table-responsive">
-
     <table class="table table-striped table-hover table-bordered">
-
-        <thead class="table-dark">
+        <thead>
             <tr>
                 <th>App ID</th>
                 <th>Name</th>
                 <th>Release Date</th>
                 <th>Price</th>
+                <th>Actions</th>
             </tr>
         </thead>
 
         <tbody>
-
             {% for game in games %}
             <tr>
-
                 <td>{{ game[0] }}</td>
 
                 <td>
@@ -49,20 +50,27 @@
 
                 <td>{{ game[2] }}</td>
 
-                <td>
-                    ${{ game[3] }}
-                </td>
+                <td>${{ game[3] }}</td>
 
+                <td>
+                    <a href="/edit-game/{{ game[0] }}"
+       class="btn btn-warning btn-sm">
+       Edit
+    </a>
+
+    <a href="/delete-game/{{ game[0] }}"
+       class="btn btn-danger btn-sm"
+       onclick="return confirm('Delete this game?');">
+       Delete
+    </a>
+                </td>
             </tr>
             {% endfor %}
-
         </tbody>
-
     </table>
-
 </div>
 
-<a href="/" class="btn btn-secondary">
+<a href="/" class="btn btn-secondary mt-3">
     Back Home
 </a>
 
